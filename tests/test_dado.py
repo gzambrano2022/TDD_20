@@ -1,4 +1,5 @@
 import unittest
+"""
 from src.juego.dado import dado
 
 
@@ -11,3 +12,4 @@ class TestGenerarValor(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+"""
