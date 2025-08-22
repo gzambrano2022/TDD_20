@@ -17,7 +17,14 @@ class Cacho:
         return self.almacen
 
     def perder_dado(self):
-        self.almacen.pop()
+        if self.count > 0:
+            if len(self.almacen) < 5:
+                self.almacen.append(self.dado.generar_valor())
+                self.count -= 1
+            else:
+                self.count -= 1
+        else:
+            self.almacen.pop()
         return self.almacen
 
     def ganar_dado(self, max_dados = 5):
