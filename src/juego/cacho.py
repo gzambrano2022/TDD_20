@@ -5,8 +5,8 @@ class Cacho:
         self.dado = Dado()
         self.almacen = []
 
-    def almacenar_dados(self):
-        for i in range(5):
+    def almacenar_dados(self, cantidad = 5):
+        for i in range(cantidad):
             self.almacen.append(self.dado.generar_valor())
         return self.almacen
 
