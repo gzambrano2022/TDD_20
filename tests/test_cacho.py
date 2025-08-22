@@ -6,9 +6,9 @@ class TestCacho(unittest.TestCase):
     @patch('src.juego.cacho.Dado')
     def test_almacenar_dados(self, mock_dado_class):
         # Configura el mock para la clase Dado.
-        mock_instancia = Mock()
-        mock_instancia.generar_valor.return_value = 3
-        mock_dado_class.return_value = mock_instancia
+        mock_dado_instance = Mock()
+        mock_dado_instance.generar_valor.return_value = 3
+        mock_dado_class.return_value = mock_dado_instance
 
         cacho = Cacho()
         cacho_con_dados = cacho.almacenar_dados()
@@ -19,7 +19,18 @@ class TestCacho(unittest.TestCase):
             self.assertIsInstance(dado_en_cacho,int)
             self.assertEqual(dado_en_cacho, 3)
 
+    @patch('src.juego.cacho.Dado')
+    def test_agitar_dados(self, mock_dado_class):
+        mock_dado_instance = Mock()
+        mock_dado_class.return_value = mock_dado_instance
 
-    #def test_agitar_dados(self):
-     #   cacho = Cacho()
-      #  cacho_con_dados = cacho.almacenar_dados()
+        mock_dado_instance.generar_valor.side_effect = [1,2,3,4,5]
+        cacho = Cacho()
+        primera_tirada = cacho.almacenar_dados()
+
+        mock_dado_instance.generar_valor.side_effect = [5,4,2,5,1]
+        segunda_tirada = cacho.agitar_dados()
+
+        self.assertNotEqual(primera_tirada, segunda_tirada)
+        self.assertEqual(primera_tirada, [1,2,3,4,5])
+        self.assertEqual(segunda_tirada, [5,4,2,5,1])

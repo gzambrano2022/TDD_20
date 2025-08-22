@@ -3,11 +3,10 @@ from src.juego.dado import Dado
 class Cacho:
     def __init__(self):
         self.dado = Dado()
+        self.almacen = []
 
     def almacenar_dados(self):
-        almacen = []
-
         for i in range(5):
-            almacen.append(self.dado.generar_valor())
+            self.almacen.append(self.dado.generar_valor())
+        return self.almacen
 
-        return almacen
