@@ -28,4 +28,9 @@ class TestCacho(unittest.TestCase):
 
        self.assertNotEqual(uno, dos)
 
+    def test_perder_dado(self):
+        cacho = Cacho()
+        dados_en_cacho = cacho.almacenar_dados().copy()
+        eliminar_dado = cacho.perder_dado().copy()
 
+        assert len(dados_en_cacho) > len(eliminar_dado)
