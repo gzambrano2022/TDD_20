@@ -14,3 +14,7 @@ class Cacho:
         for i in range(len(self.almacen)):
             self.almacen[i] = self.dado.generar_valor()
         return self.almacen
+
+    def perder_dado(self):
+        self.almacen.pop()
+        return self.almacen

@@ -16,7 +16,6 @@ class TestCacho(unittest.TestCase):
         self.assertEqual(len(cacho_con_dados), 5)
 
         for dado_en_cacho in cacho_con_dados:
-            print(dado_en_cacho)
             self.assertIsInstance(dado_en_cacho,int)
             self.assertEqual(dado_en_cacho, 3)
 
