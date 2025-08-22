@@ -9,4 +9,3 @@ class Cacho:
         for i in range(5):
             self.almacen.append(self.dado.generar_valor())
         return self.almacen
-

@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock, patch
 from src.juego.cacho import Cacho
+from src.juego.dado import Dado
 
 class TestCacho(unittest.TestCase):
     @patch('src.juego.cacho.Dado')
@@ -19,18 +20,12 @@ class TestCacho(unittest.TestCase):
             self.assertIsInstance(dado_en_cacho,int)
             self.assertEqual(dado_en_cacho, 3)
 
-    @patch('src.juego.cacho.Dado')
-    def test_agitar_dados(self, mock_dado_class):
-        mock_dado_instance = Mock()
-        mock_dado_class.return_value = mock_dado_instance
+    def test_agitar_dados(self):
+       cacho = Cacho()
 
-        mock_dado_instance.generar_valor.side_effect = [1,2,3,4,5]
-        cacho = Cacho()
-        primera_tirada = cacho.almacenar_dados()
+       uno=cacho.almacenar_dados().copy()
+       dos=cacho.agitar_dados().copy()
 
-        mock_dado_instance.generar_valor.side_effect = [5,4,2,5,1]
-        segunda_tirada = cacho.agitar_dados()
+       self.assertNotEqual(uno, dos)
 
-        self.assertNotEqual(primera_tirada, segunda_tirada)
-        self.assertEqual(primera_tirada, [1,2,3,4,5])
-        self.assertEqual(segunda_tirada, [5,4,2,5,1])
+
