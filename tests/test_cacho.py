@@ -36,7 +36,15 @@ class TestCacho(unittest.TestCase):
 
     def test_ganar_dado(self):
         cacho = Cacho()
-        dados_en_cacho = cacho.almacenar_dados().copy()
-        cacho_con_dados_ganados = cacho.ganar_dado.copy()
+        cacho.almacenar_dados()
+        cantidad_inicial = len(cacho.almacen)
+        reserva_inicial = cacho.count
 
-        assert len(dados_en_cacho) < len(cacho_con_dados_ganados)
+        cacho.ganar_dado()
+
+        if cantidad_inicial < 5:
+            self.assertEqual(len(cacho.almacen), cantidad_inicial + 1)
+            self.assertEqual(cacho.count, reserva_inicial)
+        else:
+            self.assertEqual(len(cacho.almacen), cantidad_inicial)
+            self.assertEqual(cacho.count, reserva_inicial + 1)
