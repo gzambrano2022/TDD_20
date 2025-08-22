@@ -33,3 +33,10 @@ class TestCacho(unittest.TestCase):
         eliminar_dado = cacho.perder_dado().copy()
 
         assert len(dados_en_cacho) > len(eliminar_dado)
+
+    def test_ganar_dado(self):
+        cacho = Cacho()
+        dados_en_cacho = cacho.almacenar_dados().copy()
+        cacho_con_dados_ganados = cacho.ganar_dado.copy()
+
+        assert len(dados_en_cacho) < len(cacho_con_dados_ganados)
