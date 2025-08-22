@@ -15,8 +15,8 @@ class TestDado(unittest.TestCase):
         self.assertLessEqual(valor, 6)
         self.assertEqual(valor, 5)
 
-        valores = [1,2,3,4,5,6]
 
+        valores = [1,2,3,4,5,6]
         self.assertIn(valor, valores)
 
     def test_designacion(self):
