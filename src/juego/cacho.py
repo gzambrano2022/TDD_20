@@ -4,6 +4,7 @@ class Cacho:
     def __init__(self):
         self.dado = Dado()
         self.almacen = []
+        self.count = 0
 
     def almacenar_dados(self, cantidad = 5):
         for i in range(cantidad):
@@ -18,3 +19,9 @@ class Cacho:
     def perder_dado(self):
         self.almacen.pop()
         return self.almacen
+
+    def ganar_dado(self, max_dados = 5):
+        if len(self.almacen) < max_dados:
+            self.almacen.append(self.dado.generar_valor())
+        else:
+            self.count += 1
