@@ -4,5 +4,11 @@ class ValidadorApuesta:
         cantidad_nueva, pinta_nueva = apuesta_nueva
 
         #La apuesta es valida si aumenta la pinta o la cantidad de apariciones de la pinta
-        if cantidad_nueva > cantidad_inicial or pinta_nueva > pinta_inicial:
+        if pinta_nueva == 1:
+            if cantidad_inicial % 2 == 0:
+                if cantidad_nueva == (cantidad_inicial // 2 + 1):
+                    return True
+            elif cantidad_nueva == ((cantidad_inicial + 1)//2):
+                return True
+        elif cantidad_nueva >= cantidad_inicial and pinta_nueva >= pinta_inicial:
             return True
