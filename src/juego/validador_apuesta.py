@@ -10,5 +10,7 @@ class ValidadorApuesta:
                     return True
             elif cantidad_nueva == ((cantidad_inicial + 1)//2):
                 return True
+        elif pinta_inicial == 1:
+            pass
         elif cantidad_nueva >= cantidad_inicial and pinta_nueva >= pinta_inicial:
             return True
