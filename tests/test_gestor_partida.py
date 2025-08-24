@@ -2,12 +2,12 @@ import pytest
 from src.juego.gestor_partida import Gestor_partida
 from src.juego.persona import Persona
 
-class test_gestor:
+class Test_gestor:
 
-    def test_crearjugadores(self,cantidad):
-        Gestor_partida = Gestor_partida()
-        for i in range(cantidad):
-            Gestor_partida.jugadores.append(Persona(i))
+    def test_crearjugadores(self):
+        gestor = Gestor_partida()
+        cantidad = 5
+        gestor.crear_jugadores(cantidad)
 
 
 
