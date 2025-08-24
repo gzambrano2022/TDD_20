@@ -14,5 +14,6 @@ def test_contar_pintas_en_ronda_de_un_solo_dado():
     dados = [1,2,3,4,5,3,2,1,4,3,4] #Ejemplo con 11 dados, dos jugadores con 5 dados y uno con 1 dado
     pinta = 4 #Pinta que queremos contar
     contador = ContadorPintas() #Instancia del objeto ContadorPintas
+    contador.set_ronda_especial(True) #Indicador de ronda especial activa
     resultado = contador.contar_pintas(dados,pinta) #Llamada al metodo para contar pintas
     assert resultado == 3 #Verificacion del resultado esperado
