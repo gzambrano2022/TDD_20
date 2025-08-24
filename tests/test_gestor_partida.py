@@ -1,6 +1,7 @@
 import pytest
 from src.juego.gestor_partida import Gestor_partida
 from src.juego.persona import Persona
+import random
 
 class Test_gestor:
 
@@ -8,6 +9,11 @@ class Test_gestor:
         gestor = Gestor_partida()
         cantidad = 5
         gestor.crear_jugadores(cantidad)
+
+    def test_jugador_inicial(self):
+        gestor= Gestor_partida()
+        jugador = gestor.jugador_inicial([1,2,3,4,5])
+        assert 5 == jugador
 
 
 
