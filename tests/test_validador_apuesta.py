@@ -14,3 +14,15 @@ def test_apuesta_valida():
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva1) == True
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva2) == True
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva3) == True
+
+def test_cambiar_a_ases():
+    validador = ValidadorApuesta()
+    apuesta_inicial1 = (7,3) #tres cuartas
+    apuesta_inicial2 = (8,4) #ocho cuartas
+
+    #Al cambiar a ases la apuesta se puede bajar a: La mitad + 1 si es par o la mitad redondeada hacia arriba si es impar
+    apuesta_nueva1 = (4,1) #cuatro ases
+    apuesta_nueva2 = (5,1) #cinco ases
+
+    assert validador.apuesta_valida(apuesta_inicial1, apuesta_nueva1) == True
+    assert validador.apuesta_valida(apuesta_inicial2, apuesta_nueva2) == True
