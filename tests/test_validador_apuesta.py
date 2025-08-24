@@ -26,3 +26,14 @@ def test_cambiar_a_ases():
 
     assert validador.apuesta_valida(apuesta_inicial1, apuesta_nueva1) == True
     assert validador.apuesta_valida(apuesta_inicial2, apuesta_nueva2) == True
+
+def test_cambiar_de_ases():
+    validador = ValidadorApuesta()
+    apuesta_inicial1 = (4,1) #cuatro ases
+    apuesta_inicial2 = (2,1) #dos ases
+
+    apuesta_nueva1 = (9,3) #nueve trenes
+    apuesta_nueva2 = (5,4) #cinco cuartas
+
+    assert validador.apuesta_valida(apuesta_inicial1, apuesta_nueva1) == True
+    assert validador.apuesta_valida(apuesta_inicial2, apuesta_nueva2) == True
