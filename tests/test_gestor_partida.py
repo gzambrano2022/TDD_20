@@ -13,7 +13,10 @@ class Test_gestor:
         gestor.crear_jugadores(3)
         gestor.jugador_inicial()
         assert gestor.jugador_actual == 2
-        
+    
+    def test_pasarturno():
+        gestor= Gestor_partida()
+        assert gestor.pasar_turno() == 2
 
 
 
