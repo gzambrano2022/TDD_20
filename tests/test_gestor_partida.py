@@ -1,20 +1,19 @@
-import pytest
 from src.juego.gestor_partida import Gestor_partida
-from src.juego.persona import Persona
-import random
-
+from unittest.mock import patch
 class Test_gestor:
 
     def test_crearjugadores(self):
         gestor = Gestor_partida()
         cantidad = 5
         gestor.crear_jugadores(cantidad)
-
-    def test_jugador_inicial(self):
+    
+    @patch("random.randint", side_effect=[2, 2, 1,1])
+    def test_jugador_inicial(self,mock_randint):
         gestor= Gestor_partida()
-        jugador = gestor.jugador_inicial([1,2,3,4,5])
-        assert 5 == jugador
-
+        gestor.crear_jugadores(3)
+        gestor.jugador_inicial()
+        assert gestor.jugador_actual == 2
+        
 
 
 
