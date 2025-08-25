@@ -32,6 +32,12 @@ class Gestor_partida:
             self.jugador_actual = 1
         else:
             self.jugador_actual = self.jugador_actual + 1
-                        
+    
+    def verificar_un_dado(self):
+        cantidad_jugadores = len(self.jugadores)
+        for i in range(cantidad_jugadores):
+            if len(self.jugadores[i].cacho.almacen) == 1:
+                return i + 1
+        return 0
             
 
