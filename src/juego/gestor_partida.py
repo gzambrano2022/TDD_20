@@ -26,7 +26,12 @@ class Gestor_partida:
             self.jugador_actual = empates[0] + 1
         else:
             self.jugador_actual = empates[random.randint(0,len(empates) -1)] + 1
-        
+    
+    def pasar_turno(self):
+        if self.jugador_actual == len(self.jugadores):
+            self.jugador_actual = 1
+        else:
+            self.jugador_actual = self.jugador_actual + 1
                         
             
 

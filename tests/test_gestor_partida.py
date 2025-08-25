@@ -13,10 +13,16 @@ class Test_gestor:
         gestor.crear_jugadores(3)
         gestor.jugador_inicial()
         assert gestor.jugador_actual == 2
-    
-    def test_pasarturno():
+
+    @patch("random.randint", side_effect=[1,2,3])
+    def test_pasarturno(self,mock_randint):
         gestor= Gestor_partida()
-        assert gestor.pasar_turno() == 2
+        gestor.crear_jugadores(3)
+        gestor.jugador_inicial()
+        assert gestor.jugador_actual == 3
+        gestor.pasar_turno()
+        assert gestor.jugador_actual == 1
+        
 
 
 
