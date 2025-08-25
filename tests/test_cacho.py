@@ -48,3 +48,87 @@ class TestCacho(unittest.TestCase):
         else:
             self.assertEqual(len(cacho.almacen), cantidad_inicial)
             self.assertEqual(cacho.count, reserva_inicial + 1)
+
+    def test_perder_dado_con_count_mayor_cero_y_almacen_menor_5(self):
+        cacho = Cacho()
+
+        cacho.almacen = [1, 2, 3]
+        cacho.count = 2
+        cantidad_inicial = len(cacho.almacen)
+        count_inicial = cacho.count
+
+        resultado = cacho.perder_dado()
+
+
+        self.assertEqual(len(resultado), cantidad_inicial + 1)
+        self.assertEqual(cacho.count, count_inicial - 1)
+
+    def test_perder_dado_con_count_mayor_cero_y_almacen_igual_5(self):
+        cacho = Cacho()
+
+        cacho.almacen = [1, 2, 3, 4, 5]
+        cacho.count = 2
+        cantidad_inicial = len(cacho.almacen)
+        count_inicial = cacho.count
+
+        resultado = cacho.perder_dado()
+
+
+        self.assertEqual(len(resultado), cantidad_inicial)
+        self.assertEqual(cacho.count, count_inicial - 1)
+
+    def test_perder_dado_con_count_cero(self):
+        cacho = Cacho()
+
+        cacho.almacen = [1, 2, 3, 4, 5]
+        cacho.count = 0
+        cantidad_inicial = len(cacho.almacen)
+
+        resultado = cacho.perder_dado()
+
+
+        self.assertEqual(len(resultado), cantidad_inicial - 1)
+        self.assertEqual(cacho.count, 0)
+
+    def test_ganar_dado_con_almacen_lleno(self):
+        cacho = Cacho()
+
+        cacho.almacen = [1, 2, 3, 4, 5]
+        cacho.count = 0
+        cantidad_inicial = len(cacho.almacen)
+        count_inicial = cacho.count
+
+        resultado = cacho.ganar_dado()
+
+
+        self.assertEqual(len(resultado), cantidad_inicial)
+        self.assertEqual(cacho.count, count_inicial + 1)
+
+    def test_ganar_dado_con_almacen_vacio(self):
+        cacho = Cacho()
+
+        cacho.almacen = []
+        cacho.count = 0
+        cantidad_inicial = len(cacho.almacen)
+        count_inicial = cacho.count
+
+        resultado = cacho.ganar_dado()
+
+
+        self.assertEqual(len(resultado), cantidad_inicial + 1)
+        self.assertEqual(cacho.count, count_inicial)
+
+    def test_ganar_dado_con_almacen_parcialmente_lleno(self):
+        cacho = Cacho()
+
+        cacho.almacen = [1, 2, 3]
+        cacho.count = 1
+        cantidad_inicial = len(cacho.almacen)
+        count_inicial = cacho.count
+
+        resultado = cacho.ganar_dado()
+
+
+        self.assertEqual(len(resultado), cantidad_inicial + 1)
+        self.assertEqual(cacho.count, count_inicial)
+

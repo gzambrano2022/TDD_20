@@ -32,3 +32,4 @@ class Cacho:
             self.almacen.append(self.dado.generar_valor())
         else:
             self.count += 1
+        return self.almacen
