@@ -16,9 +16,19 @@ class Arbitro_ronda:
             else:
                 jugadores[jugador_actual - 2].cacho.perder_dado()
             return "gana"
-
-
-
+    
+    def calzar(self,apuesta,jugadores,jugador_actual):
+        cantidad_jugadores = len(jugadores)
+        cara = apuesta[1]
+        cantidad_dados = 0
+        for i in range(cantidad_jugadores):
+            cantidad_dados = cantidad_dados + jugadores[i].cacho.almacen.count(cara)
+        if cantidad_dados == apuesta[0]:
+            jugadores[jugador_actual - 1].cacho.ganar_dado()
+            return "gana"
+        else:
+            jugadores[jugador_actual - 1].cacho.perder_dado()
+            return "pierde"
 
 
 
