@@ -1,9 +1,9 @@
-import unittest
+import pytest
 from unittest.mock import Mock, patch
 from src.juego.cacho import Cacho
-from src.juego.dado import Dado
 
-class TestCacho(unittest.TestCase):
+class TestCacho:
+
     @patch('src.juego.cacho.Dado')
     def test_almacenar_dados(self, mock_dado_class):
         # Configura el mock para la clase Dado.
@@ -13,19 +13,19 @@ class TestCacho(unittest.TestCase):
 
         cacho = Cacho()
         cacho_con_dados = cacho.almacenar_dados()
-        self.assertEqual(len(cacho_con_dados), 5)
+        assert len(cacho_con_dados) == 5
 
         for dado_en_cacho in cacho_con_dados:
-            self.assertIsInstance(dado_en_cacho,int)
-            self.assertEqual(dado_en_cacho, 3)
+            assert isinstance(dado_en_cacho, int)
+            assert dado_en_cacho == 3
 
     def test_agitar_dados(self):
-       cacho = Cacho()
+        cacho = Cacho()
 
-       uno=cacho.almacenar_dados().copy()
-       dos=cacho.agitar_dados().copy()
+        uno = cacho.almacenar_dados().copy()
+        dos = cacho.agitar_dados().copy()
 
-       self.assertNotEqual(uno, dos)
+        assert uno != dos
 
     def test_perder_dado(self):
         cacho = Cacho()
@@ -43,11 +43,11 @@ class TestCacho(unittest.TestCase):
         cacho.ganar_dado()
 
         if cantidad_inicial < 5:
-            self.assertEqual(len(cacho.almacen), cantidad_inicial + 1)
-            self.assertEqual(cacho.count, reserva_inicial)
+            assert len(cacho.almacen) == cantidad_inicial + 1
+            assert cacho.count == reserva_inicial
         else:
-            self.assertEqual(len(cacho.almacen), cantidad_inicial)
-            self.assertEqual(cacho.count, reserva_inicial + 1)
+            assert len(cacho.almacen) == cantidad_inicial
+            assert cacho.count == reserva_inicial + 1
 
     def test_perder_dado_con_count_mayor_cero_y_almacen_menor_5(self):
         cacho = Cacho()
@@ -59,9 +59,8 @@ class TestCacho(unittest.TestCase):
 
         resultado = cacho.perder_dado()
 
-
-        self.assertEqual(len(resultado), cantidad_inicial + 1)
-        self.assertEqual(cacho.count, count_inicial - 1)
+        assert len(resultado) == cantidad_inicial + 1
+        assert cacho.count == count_inicial - 1
 
     def test_perder_dado_con_count_mayor_cero_y_almacen_igual_5(self):
         cacho = Cacho()
@@ -73,9 +72,8 @@ class TestCacho(unittest.TestCase):
 
         resultado = cacho.perder_dado()
 
-
-        self.assertEqual(len(resultado), cantidad_inicial)
-        self.assertEqual(cacho.count, count_inicial - 1)
+        assert len(resultado) == cantidad_inicial
+        assert cacho.count == count_inicial - 1
 
     def test_perder_dado_con_count_cero(self):
         cacho = Cacho()
@@ -86,9 +84,8 @@ class TestCacho(unittest.TestCase):
 
         resultado = cacho.perder_dado()
 
-
-        self.assertEqual(len(resultado), cantidad_inicial - 1)
-        self.assertEqual(cacho.count, 0)
+        assert len(resultado) == cantidad_inicial - 1
+        assert cacho.count == 0
 
     def test_ganar_dado_con_almacen_lleno(self):
         cacho = Cacho()
@@ -100,9 +97,8 @@ class TestCacho(unittest.TestCase):
 
         resultado = cacho.ganar_dado()
 
-
-        self.assertEqual(len(resultado), cantidad_inicial)
-        self.assertEqual(cacho.count, count_inicial + 1)
+        assert len(resultado) == cantidad_inicial
+        assert cacho.count == count_inicial + 1
 
     def test_ganar_dado_con_almacen_vacio(self):
         cacho = Cacho()
@@ -114,9 +110,8 @@ class TestCacho(unittest.TestCase):
 
         resultado = cacho.ganar_dado()
 
-
-        self.assertEqual(len(resultado), cantidad_inicial + 1)
-        self.assertEqual(cacho.count, count_inicial)
+        assert len(resultado) == cantidad_inicial + 1
+        assert cacho.count == count_inicial
 
     def test_ganar_dado_con_almacen_parcialmente_lleno(self):
         cacho = Cacho()
@@ -128,7 +123,6 @@ class TestCacho(unittest.TestCase):
 
         resultado = cacho.ganar_dado()
 
-
-        self.assertEqual(len(resultado), cantidad_inicial + 1)
-        self.assertEqual(cacho.count, count_inicial)
+        assert len(resultado) == cantidad_inicial + 1
+        assert cacho.count == count_inicial
 
