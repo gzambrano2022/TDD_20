@@ -126,3 +126,19 @@ class TestCacho:
         assert len(resultado) == cantidad_inicial + 1
         assert cacho.count == count_inicial
 
+    def test_visibilidad_dados(self):
+        cacho = Cacho()
+        cacho.almacen = [5]
+
+        # Primera activación debería funcionar
+        exito, mensaje = cacho.visibilidad_dados()
+        assert exito == True
+        assert cacho.dados_visibles == True
+        assert cacho.mostrar_dados_activado == True
+
+        # Segunda activación debería fallar
+        exito2, mensaje2 = cacho.visibilidad_dados()
+        assert exito2 == False
+        assert "Ya usaste esta función anteriormente" in mensaje2
+
+
