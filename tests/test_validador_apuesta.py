@@ -1,5 +1,4 @@
 from src.juego.validador_apuesta import ValidadorApuesta
-from src.juego.contador_pintas import ContadorPintas
 
 #Una apuesta valida será aquella en la que aumenta la pinta o la cantidad de aparaciones de la pinta
 def test_apuesta_valida():
@@ -49,6 +48,18 @@ def test_aumentar_apuesta_con_ases():
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva1) == True
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva2) == True
 
+def test_apuesta_con_ases_inicial(mocker):
+    validador = ValidadorApuesta()
+    apuesta_inicial = (0,0) #Al inicio de la partida no hay apuesta previa
+
+    persona = mocker.Mock() #Instancia de persona mockeada
+    persona.cacho = mocker.Mock() #Objeto cacho de la persona mockeado
+    persona.cacho.almacen = [1] #Atributo almacen del cacho con un solo elemento
+
+    apuesta_nueva = (2,1) #Dos ases
+
+    assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva) == True
+
 def test_apuestas_invalidas():
     validador = ValidadorApuesta()
 
@@ -78,5 +89,3 @@ def test_apuestas_invalidas():
 
     assert validador.apuesta_valida(apuesta_inicial3, apuesta_nueva31) == False
     assert validador.apuesta_valida(apuesta_inicial3, apuesta_nueva32) == False
-
-#SOLO SE PUEDE PARTIR CON ASES CUANDO SE TIENE UN SOLO DADO
