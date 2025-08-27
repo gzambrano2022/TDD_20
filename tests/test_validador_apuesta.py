@@ -48,5 +48,32 @@ def test_aumentar_apuesta_con_ases():
 
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva1) == True
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva2) == True
-    
+
+def test_apuestas_invalidas():
+    validador = ValidadorApuesta()
+
+    #Apostando hacia abajo sin ases invlucrados
+    apuesta_inicial1 = (3,4) #tres cuartas
+
+    apuesta_nueva11 = (3,3) #tres trenes
+    apuesta_nueva12 = (2,4) #dos cuartas
+
+    assert validador.apuesta_valida(apuesta_inicial1, apuesta_nueva11) == False
+    assert validador.apuesta_valida(apuesta_inicial1, apuesta_nueva12) == False
+
+    #Apostado cambiando A ases de forma invalida
+    apuesta_inicial2 = (5,6) #cinco sextas
+
+    apuesta_nueva21 = (6,1) #seis ases (deberia ser tres ases)
+    apuesta_nueva22 = (5,1) #cinco ases (apuesta invalida directamente)
+
+    assert validador.apuesta_valida(apuesta_inicial2, apuesta_nueva21) == False
+    assert validador.apuesta_valida(apuesta_inicial2, apuesta_nueva22) == False
+
+    #Apostando cambiando DE ases de forma invalida
+    apuesta_inicial3 = (4,1)
+
+    apuesta_nueva31 = (7,2) #siete tontos (deberia ser nueve tontos)
+    apuesta_nueva32 = (3,1) #tres ases (apuesta invalida directamente)
+
 #SOLO SE PUEDE PARTIR CON ASES CUANDO SE TIENE UN SOLO DADO
