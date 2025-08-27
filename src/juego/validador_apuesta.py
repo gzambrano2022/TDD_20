@@ -11,16 +11,20 @@ class ValidadorApuesta:
             if cantidad_inicial % 2 == 0:
                 if cantidad_nueva == (cantidad_inicial // 2 + 1):
                     return True
-                #CASO DE APUESTA INVALIDA
+                else:
+                    return False#CASO DE APUESTA INVALIDA
             elif cantidad_nueva == ((cantidad_inicial + 1) // 2):
                 return True
-            #CASO DE APUESTA INVALIDA
+            else:
+                return False#CASO DE APUESTA INVALIDA
         #Caso en el que se cambia DE ases (A su vez, si se está apostando por ases y se quiere cambiar de pinta, solo se permite apostar al doble más uno (o más) respecto del número de ases de la apuesta.)
         elif pinta_inicial == 1 and pinta_nueva != 1:
             if cantidad_nueva >= cantidad_inicial * 2 + 1:
                 return True
-            #CASO DE APUESTA INVALIDA
+            else:
+                return False#CASO DE APUESTA INVALIDA
         #Caso en el que no hay ases involucrados (basta con que la cantidad aumente, la pinta aumente o ambas)
         elif pinta_inicial < pinta_nueva or cantidad_inicial < cantidad_nueva:
             return True
-       #CASO DE APUESTA INVALIDA
+        else:
+            return False #CASO DE APUESTA INVALIDA
