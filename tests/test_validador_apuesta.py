@@ -76,4 +76,7 @@ def test_apuestas_invalidas():
     apuesta_nueva31 = (7,2) #siete tontos (deberia ser nueve tontos)
     apuesta_nueva32 = (3,1) #tres ases (apuesta invalida directamente)
 
+    assert validador.apuesta_valida(apuesta_inicial3, apuesta_nueva31) == False
+    assert validador.apuesta_valida(apuesta_inicial3, apuesta_nueva32) == False
+
 #SOLO SE PUEDE PARTIR CON ASES CUANDO SE TIENE UN SOLO DADO
