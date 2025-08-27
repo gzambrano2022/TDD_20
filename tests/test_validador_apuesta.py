@@ -1,4 +1,5 @@
 from src.juego.validador_apuesta import ValidadorApuesta
+from src.juego.contador_pintas import ContadorPintas
 
 #Una apuesta valida será aquella en la que aumenta la pinta o la cantidad de aparaciones de la pinta
 def test_apuesta_valida():
@@ -37,3 +38,15 @@ def test_cambiar_de_ases():
 
     assert validador.apuesta_valida(apuesta_inicial1, apuesta_nueva1) == True
     assert validador.apuesta_valida(apuesta_inicial2, apuesta_nueva2) == True
+
+def test_aumentar_apuesta_con_ases():
+    validador = ValidadorApuesta()
+    apuesta_inicial = (3,1) #tres ases
+
+    apuesta_nueva1 = (4,1) #cuatro ases
+    apuesta_nueva2 = (6,1) #seis ases
+
+    assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva1) == True
+    assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva2) == True
+    
+#SOLO SE PUEDE PARTIR CON ASES CUANDO SE TIENE UN SOLO DADO
