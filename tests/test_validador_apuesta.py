@@ -50,11 +50,8 @@ def test_aumentar_apuesta_con_ases():
 
 def test_apuesta_con_ases_inicial(mocker):
     validador = ValidadorApuesta()
-    apuesta_inicial = (0,0) #Al inicio de la partida no hay apuesta previa
-
-    persona = mocker.Mock() #Instancia de persona mockeada
-    persona.cacho = mocker.Mock() #Objeto cacho de la persona mockeado
-    persona.cacho.almacen = [1] #Atributo almacen del cacho con un solo elemento
+    validador.ronda_especial = True #Indicador de ronda especial activa cuando un jugador tiene solo un dado
+    apuesta_inicial = (0,0) #Al inicio de la ronda no hay apuesta previa
 
     apuesta_nueva = (2,1) #Dos ases
 
