@@ -86,3 +86,12 @@ def test_apuestas_invalidas():
 
     assert validador.apuesta_valida(apuesta_inicial3, apuesta_nueva31) == False
     assert validador.apuesta_valida(apuesta_inicial3, apuesta_nueva32) == False
+
+    #Apostando al inicio de la ronda
+    apuesta_inicial4 = (0,0)
+
+    apuesta_nueva41 = (0,1) #cero ases
+    apuesta_nueva42 = (4,0) #cuatro ceros
+
+    assert validador.apuesta_valida(apuesta_inicial4, apuesta_nueva41) == False
+    assert validador.apuesta_valida(apuesta_inicial4, apuesta_nueva42) == False
