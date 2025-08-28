@@ -33,6 +33,8 @@ class ValidadorApuesta:
                 return False #CASO DE APUESTA INVALIDA
             
         #Caso en el que no hay ases involucrados (basta con que la cantidad aumente, la pinta aumente o ambas)
+        elif apuesta_inicial == (0,0):
+            return pinta_inicial < pinta_nueva and cantidad_inicial < cantidad_nueva
         elif pinta_inicial < pinta_nueva or cantidad_inicial < cantidad_nueva:
             return True
         else:
