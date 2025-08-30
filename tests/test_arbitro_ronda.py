@@ -45,10 +45,19 @@ def test_calzar():
     gestor.jugadores[1].cacho.almacen = [1,2,3,4,4]
     apuesta = (3,4)
     arbitro = Arbitro_ronda()
-    assert arbitro.calzar(apuesta,gestor.jugadores,gestor.jugador_actual) == "gana"
-    assert gestor.jugadores[gestor.jugador_actual - 1].cacho.count == 1
-    gestor.jugadores[0].cacho.almacen = [1,2,2,3,3]
-    gestor.jugadores[1].cacho.almacen = [5,1,1,1,4]
+    #Mas de la mitad de dados no esta en juego por lo cual falla
+    assert arbitro.calzar(apuesta,gestor.jugadores,gestor.jugador_actual) == "falla"
+    #Mitad de los dados en juego, por lo tanto se puede calzar
+    gestor.crear_jugadores(2)
+    gestor.jugadores[0].cacho.almacen = [1,2]
+    gestor.jugadores[1].cacho.almacen = [5,1]
     assert arbitro.calzar(apuesta,gestor.jugadores,gestor.jugador_actual) == "pierde"
-    #Debera tener count igual a 1, por lo tanto no se le quitan dados
-    assert len(gestor.jugadores[gestor.jugador_actual - 1].cacho.almacen) == 5
+    assert len(gestor.jugadores[gestor.jugador_actual - 1].cacho.almacen) == 1
+    #Un solo dado por lo cual se puede calzar
+    gestor.crear_jugadores(3)
+    apuesta2 = (4,6)
+    gestor.jugadores[0].cacho.almacen = [5,1,1]
+    gestor.jugadores[1].cacho.almacen = [6,5]
+    gestor.jugadores[1].cacho.almacen = [1]
+    assert arbitro.calzar(apuesta,gestor.jugadores,gestor.jugador_actual) == "gana"
+    assert len(gestor.jugadores[gestor.jugador_actual - 1].cacho.almacen) == 4
