@@ -5,7 +5,7 @@ class Arbitro_ronda:
         numero = apuesta[1]
         cantidad_dados = 0
         for i in range(cantidad_jugadores):
-            cantidad_dados = cantidad_dados + jugadores[i].cacho.almacen.count(numero)
+            cantidad_dados = cantidad_dados + jugadores[i].cacho.almacen.count(numero) + jugadores[i].cacho.almacen.count(1)
         if cantidad_dados >= apuesta[0]:
             jugadores[jugador_actual - 1].cacho.perder_dado()
             return "pierde"
@@ -29,6 +29,3 @@ class Arbitro_ronda:
         else:
             jugadores[jugador_actual - 1].cacho.perder_dado()
             return "pierde"
-
-
-
