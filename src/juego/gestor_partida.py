@@ -1,13 +1,17 @@
 from src.juego.persona import Persona
+from src.juego.validador_apuesta import ValidadorApuesta
 import random
 class Gestor_partida:
     def __init__(self):
         self.jugadores = []
         self.jugador_actual = 0
-    
+        self.apuesta_actual =[]
+
     def crear_jugadores(self,cantidad):
+        self.jugadores.clear()
         for i in range(cantidad):
             self.jugadores.append(Persona(i))
+
     def jugador_inicial(self):
         numeros = []
         cantidad_jugadores = len(self.jugadores)
@@ -27,11 +31,17 @@ class Gestor_partida:
         else:
             self.jugador_actual = empates[random.randint(0,len(empates) -1)] + 1
     
-    def pasar_turno(self):
+    def pasar_turno(self,apuesta_nueva):
+        validador = ValidadorApuesta()
+        if validador.apuesta_valida(self.apuesta_actual, apuesta_nueva) == False:
+            return False
+        self.apuesta_actual = apuesta_nueva
         if self.jugador_actual == len(self.jugadores):
             self.jugador_actual = 1
+            return True
         else:
             self.jugador_actual = self.jugador_actual + 1
+            return True
     
     def verificar_un_dado(self):
         cantidad_jugadores = len(self.jugadores)
@@ -39,5 +49,6 @@ class Gestor_partida:
             if len(self.jugadores[i].cacho.almacen) == 1:
                 return i + 1
         return 0
+    
             
 

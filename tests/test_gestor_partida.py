@@ -17,11 +17,23 @@ class Test_gestor:
     @patch("src.juego.gestor_partida.random.randint", side_effect=[1,2,3])
     def test_pasarturno(self,mock_randint):
         gestor= Gestor_partida()
+        gestor.apuesta_actual = [2,4]
+        apuesta_nueva = [3,4]
         gestor.crear_jugadores(3)
         gestor.jugador_inicial()
+        #Prueba con apuesta valida. Se aumentara la cantidad de caras
         assert gestor.jugador_actual == 3
-        gestor.pasar_turno()
+        assert gestor.pasar_turno(apuesta_nueva) == True
         assert gestor.jugador_actual == 1
+        #Prueba con apuesta invalida
+        apuesta_nueva = [2,2]
+        assert gestor.pasar_turno(apuesta_nueva) == False
+        assert gestor.jugador_actual == 1
+        #Prueba con apuesta valida. Se aumentara la cara
+        apuesta_nueva = [3,5]
+        assert gestor.pasar_turno(apuesta_nueva) == True
+        assert gestor.jugador_actual == 2
+
 
     def test_verificar_un_dado(self):
         gestor= Gestor_partida()
@@ -31,14 +43,3 @@ class Test_gestor:
         assert gestor.verificar_un_dado() == 0
         gestor.jugadores[2].cacho.almacen = [1]
         assert gestor.verificar_un_dado() == 3
-
-
-"""
-Gestor de Partida
-Implementa una clase GestorPartida que:
-
-Administre múltiples jugadores y sus dados
-Determine quién inicia cada ronda
-Maneje el flujo de turnos
-Detecte cuándo alguien queda con un dado (para activar reglas especiales)
-"""
