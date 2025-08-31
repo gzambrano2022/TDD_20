@@ -48,7 +48,7 @@ def test_aumentar_apuesta_con_ases():
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva1) == True
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva2) == True
 
-def test_apuesta_con_ases_inicial(mocker):
+def test_apuesta_con_ases_inicial():
     validador = ValidadorApuesta()
     validador.ronda_especial = True #Indicador de ronda especial activa cuando un jugador tiene solo un dado
     apuesta_inicial = (0,0) #Al inicio de la ronda no hay apuesta previa
@@ -56,6 +56,17 @@ def test_apuesta_con_ases_inicial(mocker):
     apuesta_nueva = (2,1) #Dos ases
 
     assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva) == True
+
+def test_apuestas_en_ronda_al_obligar():
+    validador = ValidadorApuesta()
+    validador.ronda_especial = True
+    validador.obligar = True
+    
+    apuesta_inicial = (2,3) #dos trenes
+
+    apuesta_nueva = (3,3)
+
+    assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva) == False
 
 def test_apuestas_invalidas():
     validador = ValidadorApuesta()
