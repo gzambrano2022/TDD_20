@@ -22,18 +22,21 @@ class Arbitro_ronda:
     def calzar(self,apuesta,jugadores,jugador_actual):
         #Verificacion para ver si se puede calzar
         cantidad_dados = 0
+        cara = apuesta[1]
         cantidad_jugadores = len(jugadores)
+        contador_pintas = ContadorPintas()
+        #Se cuentan todos los dados
         for i in range(len(jugadores)):
             cantidad_dados = cantidad_dados + len(jugadores[i].cacho.almacen)
+        #Si hay mas de da mitad de dados en juego o si el jugador que quiere calzar tiene un dado entonces se podra calzar
         if len(jugadores[jugador_actual -1].cacho.almacen) == 1 or (cantidad_jugadores*5)/2 >= cantidad_dados:
             pass
         else:
             return "falla"
-            
-        cara = apuesta[1]
+        
         cantidad_dados = 0
         for i in range(cantidad_jugadores):
-            cantidad_dados = cantidad_dados + jugadores[i].cacho.almacen.count(cara) + jugadores[i].cacho.almacen.count(1)
+            cantidad_dados = cantidad_dados + contador_pintas.contar_pintas(jugadores[i].cacho.almacen,cara)
         if cantidad_dados == apuesta[0]:
             jugadores[jugador_actual - 1].cacho.ganar_dado()
             return "gana"
