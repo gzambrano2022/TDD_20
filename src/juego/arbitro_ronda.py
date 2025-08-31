@@ -1,11 +1,13 @@
+from src.juego.contador_pintas import ContadorPintas
 class Arbitro_ronda:
 
     def dudar(self,apuesta,jugadores,jugador_actual):
         cantidad_jugadores = len(jugadores)
-        numero = apuesta[1]
+        cara = apuesta[1]
+        contador_pintas = ContadorPintas()
         cantidad_dados = 0
         for i in range(cantidad_jugadores):
-            cantidad_dados = cantidad_dados + jugadores[i].cacho.almacen.count(numero) + jugadores[i].cacho.almacen.count(1)
+            cantidad_dados = cantidad_dados + contador_pintas.contar_pintas(jugadores[i].cacho.almacen,cara)
         if cantidad_dados >= apuesta[0]:
             jugadores[jugador_actual - 1].cacho.perder_dado()
             return "pierde"
