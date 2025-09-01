@@ -1,14 +1,38 @@
 class ValidadorApuesta:
     def __init__(self):
         self.ronda_especial = False #Indicador para cuando el jugador queda con un solo dado
+        self.ronda_obligada = False #Indicador cuando se juega una ronda obligando
+        self.pinta_obligada = None  #Pinta con la que comienza el jugador que obliga
 
-    def apuesta_valida(self, apuesta_inicial, apuesta_nueva):
+    def apuesta_valida(self, apuesta_inicial, apuesta_nueva, jugador_con_un_dado = False):
         cantidad_inicial, pinta_inicial = apuesta_inicial
         cantidad_nueva, pinta_nueva = apuesta_nueva
+
+        #Caso en el que se juega una partida obligada
+        if self.ronda_obligada:
+            #Si no hay apuesta previa se permite partir con 1
+            if apuesta_inicial == (0,0):
+                if pinta_nueva == 1 and cantidad_nueva >= 1:
+                    #Se fija la pinta
+                    self.pinta_obligada = 1
+                    return True
+                #La pinta se fija en cualquier caso
+                elif pinta_nueva > pinta_inicial and cantidad_nueva > cantidad_inicial:
+                    self.pinta_obligada = pinta_nueva
+                    return True
+            #Si ya habia una pinta fijada antes
+            elif self.pinta_obligada is not None:
+                if pinta_nueva != self.pinta_obligada:
+                    #Solo los jugadores con un dado pueden cambiar la pinta
+                    if(jugador_con_un_dado and cantidad_nueva > cantidad_inicial):
+                        self.pinta_obligada = pinta_nueva
+                        return True
+                    return False
+    
         
         #Caso en el que se comienza una ronda nueva (no hay apuesta inicial)
-        if apuesta_inicial == (0,0) and self.ronda_especial == True and pinta_nueva == 1 and cantidad_nueva >= 1:
-            return True
+        #if apuesta_inicial == (0,0) and self.ronda_especial == True and pinta_nueva == 1 and cantidad_nueva >= 1:
+        #    return True
         
         #Caso en el que se apuesta con ases dentro de una apuesta con ases (es decir, se aumenta la cantidad de ases)
         elif pinta_inicial == 1 and pinta_nueva == 1 and cantidad_nueva > cantidad_inicial:

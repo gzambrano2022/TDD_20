@@ -50,7 +50,7 @@ def test_aumentar_apuesta_con_ases():
 
 def test_apuesta_con_ases_inicial():
     validador = ValidadorApuesta()
-    validador.ronda_especial = True #Indicador de ronda especial activa cuando un jugador tiene solo un dado
+    validador.ronda_obligada = True #Indicador de ronda especial activa cuando un jugador tiene solo un dado
     apuesta_inicial = (0,0) #Al inicio de la ronda no hay apuesta previa
 
     apuesta_nueva = (2,1) #Dos ases
@@ -59,14 +59,16 @@ def test_apuesta_con_ases_inicial():
 
 def test_apuestas_en_ronda_al_obligar():
     validador = ValidadorApuesta()
-    validador.ronda_especial = True
-    validador.obligar = True
+    validador.ronda_obligada = True
     
-    apuesta_inicial = (2,3) #dos trenes
+    apuesta_inicial1 = (0,0) #Sin apuesta inicial
+    apuesta_inicial2 = (2,3) #dos trenes
 
-    apuesta_nueva = (3,3)
+    apuesta_nueva1 = (3,1) #tres ases
+    apuesta_nueva2 = (2,4) #dos cuartas
 
-    assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva) == False
+    assert validador.apuesta_valida(apuesta_inicial1, apuesta_nueva1, jugador_con_un_dado = True) == True
+    assert validador.apuesta_valida(apuesta_inicial2, apuesta_nueva2, jugador_con_un_dado = False) == False
 
 def test_apuestas_invalidas():
     validador = ValidadorApuesta()
