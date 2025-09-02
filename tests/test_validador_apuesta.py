@@ -55,7 +55,8 @@ def test_apuesta_con_ases_inicial():
 
     apuesta_nueva = (2,1) #Dos ases
 
-    assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva) == True
+    assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva, jugador_con_un_dado = False) == False
+    assert validador.apuesta_valida(apuesta_inicial, apuesta_nueva, jugador_con_un_dado = True) == True
 
 def test_apuestas_en_ronda_al_obligar():
     validador = ValidadorApuesta()
